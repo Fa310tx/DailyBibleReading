@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:local="clr-namespace:DailyBibleReading"
+	x:Class="DailyBibleReading.Views.MainPage">
+
+	<TabbedPage.ToolbarItems>
+		<!-- icon requires png all lowercase only alpha-numeric in the following directories
+		iOS - place the image at /Resources
+		Android - place the image at /Resources/drawable
+		Windows - place the image in the Windows Phone application project root
+		-->
+		<ToolbarItem Clicked="Refresh" Icon="refresh.png" Text="Refresh"/>
+		<ToolbarItem Clicked="Share" Icon="share.png" Text="Share"/>
+		<ToolbarItem Clicked="OpenBibleReadingPage" Order="Secondary" Text="Bible Reading Page"/>
+		<ToolbarItem Clicked="SendEmail" Order="Secondary" Text="Feedback"/>
+		<!-- not working yet
+		<ToolbarItem Clicked="MoreFromDeveloper" Order="Secondary" Text="More From Developer"/>
+		-->
+		<ToolbarItem Clicked="Settings" Order="Secondary" Text="Settings"/>
+	</TabbedPage.ToolbarItems>
+
+	<TabbedPage.Children>
+		<ContentPage Title="Today's Chapter">
+			<ListView x:Name="Verses" CachingStrategy="RecycleElement" HasUnevenRows="True" ItemsSource="{Binding}" Margin="-12, 0">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<StackLayout Padding="12, 6">
+								<Label Text="{Binding VerseReference}" FontAttributes="Bold" FontSize="12"  Margin="0, 0, 0, -6"/>
+								<Label Text="{Binding text}" FontSize="Medium"/>
+							</StackLayout>
+						</ViewCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+		</ContentPage>
+		<ContentPage Title="Reading Schedule">
+			<ListView x:Name="Chapters" CachingStrategy="RecycleElement" HasUnevenRows="True" ItemsSource="{Binding}" ItemTapped="Chapters_ItemTapped" Margin="-12, 0">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<StackLayout Padding="12, 6">
+								<Label Text="{Binding date}" FontAttributes="Bold" FontSize="12" Margin="0, 0, 0, -6"/>
+								<Label Text="{Binding ChapterReference}" FontSize="Medium"/>
+							</StackLayout>
+						</ViewCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+		</ContentPage>
+	</TabbedPage.Children>
+</TabbedPage>

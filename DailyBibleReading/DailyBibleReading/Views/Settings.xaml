@@ -1,6 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	x:Class="DailyBibleReading.Views.Settings">
+	x:Class="DailyBibleReading.Views.Settings"
+	Title="Settings">
 
+	<ScrollView>
+		<StackLayout>
+			<Label Text="Bible Version"/>
+			<Picker x:Name="VersionPicker" SelectedIndexChanged="VersionPicker_SelectedIndexChanged">
+				<Picker.Items>
+					<x:String>asv1901</x:String>
+					<x:String>bbe</x:String>
+					<x:String>darby</x:String>
+					<x:String>kjv</x:String>
+					<x:String>nasb</x:String>
+					<x:String>niv</x:String>
+					<x:String>nkjv</x:String>
+					<x:String>nlt</x:String>
+					<x:String>rsv</x:String>
+					<x:String>web</x:String>
+					<x:String>ylt</x:String>
+				</Picker.Items>
+			</Picker>
+			<Label Text="Font Size"/>
+			<Picker x:Name="FontSizePicker" SelectedIndexChanged="FontSizePicker_SelectedIndexChanged">
+				<Picker.Items>
+					<x:String>10</x:String>
+					<x:String>11</x:String>
+					<x:String>12</x:String>
+					<x:String>13</x:String>
+					<x:String>14</x:String>
+					<x:String>15</x:String>
+					<x:String>16</x:String>
+					<x:String>17</x:String>
+					<x:String>18</x:String>
+					<x:String>19</x:String>
+					<x:String>20</x:String>
+					<x:String>21</x:String>
+					<x:String>22</x:String>
+					<x:String>23</x:String>
+					<x:String>24</x:String>
+					<x:String>25</x:String>
+					<x:String>26</x:String>
+					<x:String>27</x:String>
+					<x:String>28</x:String>
+					<x:String>29</x:String>
+				</Picker.Items>
+			</Picker>
+			<Label x:Name="LoremIpsum" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+		</StackLayout>
+	</ScrollView>
 </ContentPage>

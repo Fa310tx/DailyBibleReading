@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DailyBibleReading.ViewModels
 {
 	class MainPageViewModel
 	{
-		public async static Task PopulateCollections(ObservableCollection<ChapterItem> _chaptercollection, ObservableCollection<VerseItem> _versecollection, string _version = "b_kjv")
+		public async static Task PopulateCollectionsAsync(ObservableCollection<ChapterItem> _chaptercollection, ObservableCollection<VerseItem> _versecollection, string _version = "b_kjv")
 		{
 			// the the daily bible reading information for the whole week surrounding today
 			// great examples of working with dates (http://www.dotnetperls.com/datetime)
@@ -66,15 +63,16 @@ namespace DailyBibleReading.ViewModels
 				chapteritem.ChapterReference = chapteritem.book + " " + chapteritem.chapter;
 				// great examples of working with dates (http://www.dotnetperls.com/datetime)
 				// chapter.date is 2001-12-25 and chapteritem.date is Sunday, December 25, 2001
-				chapteritem.date = chapter.date;
+				chapteritem.date = DateTime.Parse(chapter.date).ToString("D");
 				// check to see if the chapter is today's chapter
-				if (chapteritem.date == today.ToString("yyyy-MM-dd"))
+				if (chapteritem.date == today.ToString("D"))
 				{
-					chapteritem.IsTodaysChapter = true;
 					chapteritem.HasBeenRead = true;
+					chapteritem.IsTodaysChapter = true;
 				}
 				else
 				{
+					chapteritem.HasBeenRead = false;
 					chapteritem.IsTodaysChapter = false;
 				}
 				chapteritem.verses = chapter.verses;
@@ -110,7 +108,6 @@ namespace DailyBibleReading.ViewModels
 		}
 	}
 
-	/* uncomment if removing other viewmodels
 	public class VerseItem : Verse
 	{
 		public string VerseReference { get; set; }
@@ -121,5 +118,4 @@ namespace DailyBibleReading.ViewModels
 		public bool IsTodaysChapter { get; set; }
 		public string ChapterReference { get; set; }
 	}
-	*/
 }

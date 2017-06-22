@@ -33,21 +33,17 @@ namespace DailyBibleReading
 			string result = null;
 
 			// make the api call
-			result = await Helper.GetJsonAsync("http://www.anti-exe.com/api/dailybiblereading?begindate=" + _begindate + "&enddate=" + _enddate + "&version=" + _version);
+			result = await Helper.GetHttpStringAsync("http://www.anti-exe.com/api/dailybiblereading?begindate=" + _begindate + "&enddate=" + _enddate + "&version=" + _version);
 
-			RootObject rootobject = null;
-			//string textfile = "ApiResults.txt";
+			string textfile = "ApiResults.txt";
 			// if there is no content
-			if (result == null || result.Contains("SQLSTATE") == true)
+			if (result == null || result == "" || result.Contains("SQLSTATE") == true)
 			{
 				// read content from a pre-existing file
 				//result = await Helper.ReadTextFileAsync(textfile);
 				// do something with the results
 				// Output to debugger
 				Debug.WriteLine("Can't connect to the API." + "\r\n" + "Loading from local cache.");
-				// create a popup with the results
-				//MessageDialog dialog = new MessageDialog("Can't connect to the API." + "\r\n" + "Loading from local cache.");
-				//await dialog.ShowAsync();
 			}
 			else
 			{
@@ -55,15 +51,14 @@ namespace DailyBibleReading
 				//await Helper.WriteTextFileAsync(textfile, result);
 			}
 
+			RootObject rootobject = null;
+
 			// if we still don't have any content
-			if (result == null)
+			if (result == null || result == "")
 			{
 				// do something with the results
 				// Output to debugger
 				Debug.WriteLine("Can't load from local cache." + "\r\n" + "Check your internet connection.");
-				// create a popup with the results
-				//MessageDialog dialog = new MessageDialog("Can't load from local cache." + "\r\n" + "Check your internet connection.");
-				//await dialog.ShowAsync();
 			}
 			else
 			{
