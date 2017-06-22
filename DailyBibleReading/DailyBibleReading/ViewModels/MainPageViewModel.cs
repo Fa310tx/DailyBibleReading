@@ -4,6 +4,21 @@ using System.Threading.Tasks;
 
 namespace DailyBibleReading.ViewModels
 {
+	public class VerseItem : Verse
+	{
+		public string VerseReference { get; set; }
+		public int TitleFontSize { get; set; }
+		public int DetailFontSize { get; set; }
+	}
+	public class ChapterItem : Chapter
+	{
+		public bool HasBeenRead { get; set; }
+		public bool IsTodaysChapter { get; set; }
+		public string ChapterReference { get; set; }
+		public int TitleFontSize { get; set; }
+		public int DetailFontSize { get; set; }
+	}
+
 	class MainPageViewModel
 	{
 		public async static Task PopulateCollectionsAsync(ObservableCollection<ChapterItem> _chaptercollection, ObservableCollection<VerseItem> _versecollection, string _version = "b_kjv")
@@ -79,6 +94,8 @@ namespace DailyBibleReading.ViewModels
 					}
 					chapteritem.verses = chapter.verses;
 					chapteritem.version = chapter.version;
+					chapteritem.DetailFontSize = Helpers.Settings.FontSize;
+					chapteritem.TitleFontSize = Convert.ToInt32(chapteritem.DetailFontSize * 0.6);
 
 					_chaptercollection.Add(chapteritem);
 
@@ -91,6 +108,8 @@ namespace DailyBibleReading.ViewModels
 							verseitem.text = verse.text;
 							verseitem.verse = verse.verse;
 							verseitem.VerseReference = chapteritem.ChapterReference + ":" + verseitem.verse;
+							verseitem.DetailFontSize = chapteritem.DetailFontSize;
+							verseitem.TitleFontSize = chapteritem.TitleFontSize;
 
 							_versecollection.Add(verseitem);
 						}
@@ -125,16 +144,5 @@ namespace DailyBibleReading.ViewModels
 				_versecollection.Add(verseitem);
 			}
 		}
-	}
-
-	public class VerseItem : Verse
-	{
-		public string VerseReference { get; set; }
-	}
-	public class ChapterItem : Chapter
-	{
-		public bool HasBeenRead { get; set; }
-		public bool IsTodaysChapter { get; set; }
-		public string ChapterReference { get; set; }
 	}
 }

@@ -27,8 +27,8 @@
 					<DataTemplate>
 						<ViewCell>
 							<StackLayout Padding="12, 6">
-								<Label Text="{Binding VerseReference}" FontAttributes="Bold" FontSize="12"  Margin="0, 0, 0, -6"/>
-								<Label Text="{Binding text}" FontSize="Medium"/>
+								<Label Text="{Binding VerseReference}" FontAttributes="Bold" FontSize="{Binding TitleFontSize}" Margin="0, 0, 0, -6"/>
+								<Label Text="{Binding text}" FontSize="{Binding DetailFontSize}"/>
 							</StackLayout>
 						</ViewCell>
 					</DataTemplate>
@@ -41,8 +41,8 @@
 					<DataTemplate>
 						<ViewCell>
 							<StackLayout Padding="12, 6">
-								<Label Text="{Binding date}" FontAttributes="Bold" FontSize="12" Margin="0, 0, 0, -6"/>
-								<Label Text="{Binding ChapterReference}" FontSize="Medium"/>
+								<Label Text="{Binding date}" FontAttributes="Bold" FontSize="{Binding TitleFontSize}" Margin="0, 0, 0, -6"/>
+								<Label Text="{Binding ChapterReference}" FontSize="{Binding DetailFontSize}"/>
 							</StackLayout>
 						</ViewCell>
 					</DataTemplate>

@@ -1,5 +1,6 @@
 ﻿using DailyBibleReading.ViewModels;
 using Plugin.DeviceInfo;
+using Plugin.Settings;
 using Plugin.Share;
 using Plugin.Share.Abstractions;
 using System;
@@ -27,6 +28,12 @@ namespace DailyBibleReading.Views
 			Chapters.BindingContext = ChapterCollection;
 		}
 
+		private void LoadPreferences()
+		{
+			Helpers.Settings.Version = CrossSettings.Current.GetValueOrDefault("Version", "b_kjv");
+			Helpers.Settings.FontSize = Convert.ToInt32(CrossSettings.Current.GetValueOrDefault("FontSize", 16));
+		}
+
 		private async void GetDataAsync()
 		{
 			// show the progress visualization
@@ -36,7 +43,7 @@ namespace DailyBibleReading.Views
 			ChapterCollection.Clear();
 			VerseCollection.Clear();
 
-			await MainPageViewModel.PopulateCollectionsAsync(ChapterCollection, VerseCollection);
+			await MainPageViewModel.PopulateCollectionsAsync(ChapterCollection, VerseCollection, Helpers.Settings.Version);
 
 			// hide the progress visualization
 			Chapters.IsRefreshing = false;
@@ -46,6 +53,7 @@ namespace DailyBibleReading.Views
 		protected override void OnAppearing()
 		{
 			GetDataAsync();
+			LoadPreferences();
 
 			base.OnAppearing();
 		}
@@ -67,6 +75,8 @@ namespace DailyBibleReading.Views
 				verseitem.VerseReference = selectedchapter.ChapterReference + ":" + verse.verse;
 				verseitem.verse = verse.verse;
 				verseitem.text = verse.text;
+				verseitem.DetailFontSize = Helpers.Settings.FontSize;
+				verseitem.TitleFontSize = Convert.ToInt32(verseitem.DetailFontSize * 0.6);
 
 				// add the item
 				VerseCollection.Add(verseitem);
