@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PCLStorage;
+using System;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -74,7 +75,6 @@ namespace DailyBibleReading
 		{
 		}
 
-		/*
 		// read a text file from the app's local folder
 		public static async Task<string> ReadTextFileAsync(string _filename)
 		{
@@ -136,6 +136,5 @@ namespace DailyBibleReading
 			// return the contents of the file
 			return result;
 		}
-		*/
 	}
 }

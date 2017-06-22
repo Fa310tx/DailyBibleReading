@@ -40,7 +40,7 @@ namespace DailyBibleReading
 			if (result == null || result == "" || result.Contains("SQLSTATE") == true)
 			{
 				// read content from a pre-existing file
-				//result = await Helper.ReadTextFileAsync(textfile);
+				result = await Helper.ReadTextFileAsync(textfile);
 				// do something with the results
 				// Output to debugger
 				Debug.WriteLine("Can't connect to the API." + "\r\n" + "Loading from local cache.");
@@ -48,7 +48,7 @@ namespace DailyBibleReading
 			else
 			{
 				// write to a cache file
-				//await Helper.WriteTextFileAsync(textfile, result);
+				await Helper.WriteTextFileAsync(textfile, result);
 			}
 
 			RootObject rootobject = null;
