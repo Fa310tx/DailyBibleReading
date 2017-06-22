@@ -53,55 +53,74 @@ namespace DailyBibleReading.ViewModels
 			}
 
 			var apiresults = await Api.GetApiResultsAsync(begindate.ToString("yyyy-MM-dd"), enddate.ToString("yyyy-MM-dd"), _version);
-			var chapters = apiresults.chapters;
-			foreach (var chapter in chapters)
+			if (apiresults != null)
 			{
-				var chapteritem = new ChapterItem();
+				var chapters = apiresults.chapters;
+				foreach (var chapter in chapters)
+				{
+					var chapteritem = new ChapterItem();
 
-				chapteritem.book = chapter.book;
-				chapteritem.chapter = chapter.chapter;
-				chapteritem.ChapterReference = chapteritem.book + " " + chapteritem.chapter;
-				// great examples of working with dates (http://www.dotnetperls.com/datetime)
-				// chapter.date is 2001-12-25 and chapteritem.date is Sunday, December 25, 2001
-				chapteritem.date = DateTime.Parse(chapter.date).ToString("D");
-				// check to see if the chapter is today's chapter
-				if (chapteritem.date == today.ToString("D"))
-				{
-					chapteritem.HasBeenRead = true;
-					chapteritem.IsTodaysChapter = true;
-				}
-				else
-				{
-					chapteritem.HasBeenRead = false;
-					chapteritem.IsTodaysChapter = false;
-				}
-				chapteritem.verses = chapter.verses;
-				chapteritem.version = chapter.version;
-				_chaptercollection.Add(chapteritem);
+					chapteritem.book = chapter.book;
+					chapteritem.chapter = chapter.chapter;
+					chapteritem.ChapterReference = chapteritem.book + " " + chapteritem.chapter;
+					// great examples of working with dates (http://www.dotnetperls.com/datetime)
+					// chapter.date is 2001-12-25 and chapteritem.date is Sunday, December 25, 2001
+					chapteritem.date = DateTime.Parse(chapter.date).ToString("D");
+					// check to see if the chapter is today's chapter
+					if (chapteritem.date == today.ToString("D"))
+					{
+						chapteritem.HasBeenRead = true;
+						chapteritem.IsTodaysChapter = true;
+					}
+					else
+					{
+						chapteritem.HasBeenRead = false;
+						chapteritem.IsTodaysChapter = false;
+					}
+					chapteritem.verses = chapter.verses;
+					chapteritem.version = chapter.version;
 
-				if (chapteritem.IsTodaysChapter == true)
-				{
-					foreach (var verse in chapteritem.verses)
+					_chaptercollection.Add(chapteritem);
+
+					if (chapteritem.IsTodaysChapter == true)
+					{
+						foreach (var verse in chapteritem.verses)
+						{
+							var verseitem = new VerseItem();
+
+							verseitem.text = verse.text;
+							verseitem.verse = verse.verse;
+							verseitem.VerseReference = chapteritem.ChapterReference + ":" + verseitem.verse;
+
+							_versecollection.Add(verseitem);
+						}
+					}
+					// no chapter on the weekend
+					// great examples of working with dates (http://www.dotnetperls.com/datetime)
+					else if (day == DayOfWeek.Saturday || day == DayOfWeek.Sunday)
 					{
 						var verseitem = new VerseItem();
 
-						verseitem.text = verse.text;
-						verseitem.verse = verse.verse;
-						verseitem.VerseReference = chapteritem.ChapterReference + ":" + verseitem.verse;
+						verseitem.text = "Come join us in reading the Bible this year. We read one chapter of the Bible each weekday (Monday through Friday).";
+						verseitem.VerseReference = "No chapter today";
 
 						_versecollection.Add(verseitem);
 					}
 				}
 			}
-
-			// no chapter on the weekend
-			// great examples of working with dates (http://www.dotnetperls.com/datetime)
-			if (day == DayOfWeek.Saturday || day == DayOfWeek.Sunday)
+			else
 			{
+				var chapteritem = new ChapterItem();
+
+				chapteritem.date = "No Data";
+				chapteritem.ChapterReference = "Unable to connect to the internet or load from cache.";
+
+				_chaptercollection.Add(chapteritem);
+
 				var verseitem = new VerseItem();
 
-				verseitem.text = "Come join us in reading the Bible this year. We read one chapter of the Bible each weekday (Monday through Friday).";
-				verseitem.VerseReference = "No chapter today";
+				verseitem.text = "Unable to connect to the internet or load from cache.";
+				verseitem.VerseReference = "No Data";
 
 				_versecollection.Add(verseitem);
 			}

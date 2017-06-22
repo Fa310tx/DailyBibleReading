@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PCLStorage;
+using System;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -7,8 +8,8 @@ using Xamarin.Forms;
 namespace DailyBibleReading
 {
 	public class Helper
-    {
-        // connect to a json api and return the results
+	{
+		// connect to a json api and return the results
         public static async Task<string> GetHttpStringAsync(string _url)
         {
             // declare an empty variable to be filled later
@@ -21,14 +22,12 @@ namespace DailyBibleReading
             {
                 result = await httpclient.GetStringAsync(url);
 
-                // do something with the results
                 // Output to debugger
                 //Debug.WriteLine(result);
             }
             catch (Exception ex)
             {
                 // Details in ex.Message and ex.HResult.
-                // do something with the results
                 // Output to debugger
                 Debug.WriteLine(ex);
             }
@@ -74,12 +73,12 @@ namespace DailyBibleReading
 		{
 		}
 
-		/*
 		// read a text file from the app's local folder
 		public static async Task<string> ReadTextFileAsync(string _filename)
 		{
 			// declare an empty variable to be filled later
 			string result = null;
+
 			// see if the file exists
 			try
 			{
@@ -98,10 +97,10 @@ namespace DailyBibleReading
 			// if the file doesn't exist
 			catch (Exception ex)
 			{
-				// do something with the results
 				// Output to debugger
 				Debug.WriteLine(ex);
 			}
+
 			// return the contents of the file
 			return result;
 		}
@@ -110,6 +109,7 @@ namespace DailyBibleReading
 		{
 			// declare an empty variable to be filled later
 			string result = null;
+
 			try
 			{
 				// get hold of the file system
@@ -133,9 +133,9 @@ namespace DailyBibleReading
 				// Output to debugger
 				Debug.WriteLine(ex);
 			}
+
 			// return the contents of the file
 			return result;
 		}
-		*/
 	}
 }
