@@ -15,35 +15,17 @@ namespace DailyBibleReading.Helpers
 		{
 			get
 			{
-			return CrossSettings.Current;
+				return CrossSettings.Current;
 			}
 		}
 
 		#region Setting Constants
-		private const string SettingsKey = "settings_key";
-		private static readonly string SettingsDefault = string.Empty;
-
 		private const string FontSizeKey = "FontSize";
 		private static readonly int FontSizeDefault = 16;
 
 		private const string VersionKey = "Version";
 		private static readonly string VersionDefault = "b_kjv";
-
-		private const string HasBeenReadKey = "HasBeenRead";
-		private static readonly string HasBeenReadDefault = null;
 		#endregion
-
-		public static string GeneralSettings
-		{
-			get
-			{
-				return AppSettings.GetValueOrDefault<string>(SettingsKey, SettingsDefault);
-			}
-			set
-			{
-				AppSettings.AddOrUpdateValue<string>(SettingsKey, value);
-			}
-		}
 
 		public static int FontSize
 		{
@@ -66,18 +48,6 @@ namespace DailyBibleReading.Helpers
 			set
 			{
 				AppSettings.AddOrUpdateValue<string>(VersionKey, value);
-			}
-		}
-
-		public static string HasBeenRead
-		{
-			get
-			{
-				return AppSettings.GetValueOrDefault<string>(HasBeenReadKey, HasBeenReadDefault);
-			}
-			set
-			{
-				AppSettings.AddOrUpdateValue<string>(HasBeenReadKey, value);
 			}
 		}
 	}

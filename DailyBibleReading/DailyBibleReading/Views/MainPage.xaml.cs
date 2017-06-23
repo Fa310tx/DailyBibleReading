@@ -68,7 +68,11 @@ namespace DailyBibleReading.Views
 			var selectedchapter = (ChapterItem)e.Item;
 
 			selectedchapter.HasBeenRead = true;
-			Helpers.Settings.HasBeenRead = DateTime.Parse(selectedchapter.date).ToString("yyyy-MM-dd");
+			var date = DateTime.Parse(selectedchapter.date).ToString("yyyy-MM-dd");
+			if (!CrossSettings.Current.Contains(date))
+			{
+				CrossSettings.Current.AddOrUpdateValue(date, "HasBeenRead");
+			}
 
 			// iterate through the object
 			foreach (var verse in selectedchapter.verses)
