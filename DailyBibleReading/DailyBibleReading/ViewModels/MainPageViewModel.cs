@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Plugin.Settings;
+using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace DailyBibleReading.ViewModels
 {
@@ -84,13 +87,20 @@ namespace DailyBibleReading.ViewModels
 					// check to see if the chapter is today's chapter
 					if (chapteritem.date == today.ToString("D"))
 					{
-						Helpers.Settings.HasBeenRead = chapter.date;
+						CrossSettings.Current.AddOrUpdateValue(chapter.date, "HasBeenRead");
 						chapteritem.HasBeenRead = true;
 						chapteritem.IsTodaysChapter = true;
 					}
 					else
 					{
-						chapteritem.HasBeenRead = false;
+						if (CrossSettings.Current.Contains(chapter.date))
+						{
+							chapteritem.HasBeenRead = true;
+						}
+						else
+						{
+							chapteritem.HasBeenRead = false;
+						}
 						chapteritem.IsTodaysChapter = false;
 					}
 					chapteritem.verses = chapter.verses;
@@ -144,6 +154,46 @@ namespace DailyBibleReading.ViewModels
 
 				_versecollection.Add(verseitem);
 			}
+		}
+	}
+
+	// set the color
+	public sealed class HasBeenReadConverter : IValueConverter
+	{
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			if (value != null && (bool)value)
+			{
+				return Color.LightGray;
+			}
+			else
+			{
+				return Color.Default;
+			}
+		}
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			return true;
+		}
+	}
+
+	// set the color
+	public sealed class TodaysChapterConverter : IValueConverter
+	{
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			if (value != null && (bool)value)
+			{
+				return Color.Brown;
+			}
+			else
+			{
+				return Color.Transparent;
+			}
+		}
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			return true;
 		}
 	}
 }

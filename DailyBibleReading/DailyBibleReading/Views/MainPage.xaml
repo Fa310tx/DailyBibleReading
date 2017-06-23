@@ -2,7 +2,15 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:local="clr-namespace:DailyBibleReading"
+	xmlns:converters="clr-namespace:DailyBibleReading.ViewModels"
 	x:Class="DailyBibleReading.Views.MainPage">
+
+	<TabbedPage.Resources>
+		<ResourceDictionary>
+			<converters:HasBeenReadConverter x:Key="HasBeenReadConverter"/>
+			<converters:TodaysChapterConverter x:Key="TodaysChapterConverter"/>
+		</ResourceDictionary>
+	</TabbedPage.Resources>
 
 	<TabbedPage.ToolbarItems>
 		<!-- icon requires png all lowercase only alpha-numeric in the following directories
@@ -40,9 +48,9 @@
 				<ListView.ItemTemplate>
 					<DataTemplate>
 						<ViewCell>
-							<StackLayout Padding="12, 6">
-								<Label Text="{Binding date}" FontAttributes="Bold" FontSize="{Binding TitleFontSize}" Margin="0, 0, 0, -6"/>
-								<Label Text="{Binding ChapterReference}" FontSize="{Binding DetailFontSize}"/>
+							<StackLayout BackgroundColor="{Binding IsTodaysChapter, Converter={StaticResource TodaysChapterConverter}}" Padding="12, 6">
+								<Label Text="{Binding date}" FontAttributes="Bold" FontSize="{Binding TitleFontSize}" Margin="0, 0, 0, -6" TextColor="{Binding HasBeenRead, Converter={StaticResource HasBeenReadConverter}}"/>
+								<Label Text="{Binding ChapterReference}" FontSize="{Binding DetailFontSize}" TextColor="{Binding HasBeenRead, Converter={StaticResource HasBeenReadConverter}}"/>
 							</StackLayout>
 						</ViewCell>
 					</DataTemplate>
