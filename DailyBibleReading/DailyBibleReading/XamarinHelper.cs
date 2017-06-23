@@ -14,6 +14,7 @@ namespace DailyBibleReading
         {
             // declare an empty variable to be filled later
             string result = null;
+			// add Microsoft.Net.Http for portable class libraries
             HttpClient httpclient = new HttpClient();
             Uri url = new Uri(_url);
 
@@ -82,6 +83,7 @@ namespace DailyBibleReading
 			// see if the file exists
 			try
 			{
+				// add PCLStorage to all projects
 				// get hold of the file system
 				IFolder rootFolder = FileSystem.Current.LocalStorage;
 
@@ -112,6 +114,7 @@ namespace DailyBibleReading
 
 			try
 			{
+				// add PCLStorage to all projects
 				// get hold of the file system
 				IFolder rootFolder = FileSystem.Current.LocalStorage;
 

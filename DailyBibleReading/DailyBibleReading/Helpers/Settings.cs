@@ -30,7 +30,7 @@ namespace DailyBibleReading.Helpers
 		private static readonly string VersionDefault = "b_kjv";
 
 		private const string HasBeenReadKey = "HasBeenRead";
-		private static readonly bool HasBeenReadDefault = false;
+		private static readonly string HasBeenReadDefault = null;
 		#endregion
 
 		public static string GeneralSettings
@@ -69,15 +69,15 @@ namespace DailyBibleReading.Helpers
 			}
 		}
 
-		public static bool HasBeenRead
+		public static string HasBeenRead
 		{
 			get
 			{
-				return AppSettings.GetValueOrDefault<bool>(HasBeenReadKey, HasBeenReadDefault);
+				return AppSettings.GetValueOrDefault<string>(HasBeenReadKey, HasBeenReadDefault);
 			}
 			set
 			{
-				AppSettings.AddOrUpdateValue<bool>(HasBeenReadKey, value);
+				AppSettings.AddOrUpdateValue<string>(HasBeenReadKey, value);
 			}
 		}
 	}

@@ -67,6 +67,9 @@ namespace DailyBibleReading.Views
 			// the object sent from the click
 			var selectedchapter = (ChapterItem)e.Item;
 
+			selectedchapter.HasBeenRead = true;
+			Helpers.Settings.HasBeenRead = DateTime.Parse(selectedchapter.date).ToString("yyyy-MM-dd");
+
 			// iterate through the object
 			foreach (var verse in selectedchapter.verses)
 			{

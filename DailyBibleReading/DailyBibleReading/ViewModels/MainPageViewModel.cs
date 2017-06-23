@@ -84,6 +84,7 @@ namespace DailyBibleReading.ViewModels
 					// check to see if the chapter is today's chapter
 					if (chapteritem.date == today.ToString("D"))
 					{
+						Helpers.Settings.HasBeenRead = chapter.date;
 						chapteritem.HasBeenRead = true;
 						chapteritem.IsTodaysChapter = true;
 					}
