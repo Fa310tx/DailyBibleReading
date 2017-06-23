@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PCLStorage;
+using System;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -81,7 +82,6 @@ namespace DailyBibleReading
 			// see if the file exists
 			try
 			{
-				/*
 				// get hold of the file system
 				IFolder rootFolder = FileSystem.Current.LocalStorage;
 
@@ -89,11 +89,10 @@ namespace DailyBibleReading
 				//IFolder folder = await rootFolder.CreateFolderAsync("DailyBibleReading", CreationCollisionOption.OpenIfExists);
 
 				// create a file, overwriting any existing file
-				IFile file = await rootFolder.CreateFileAsync(_filename, CreationCollisionOption.ReplaceExisting);
+				IFile file = await rootFolder.CreateFileAsync(_filename, CreationCollisionOption.OpenIfExists);
 
 				// populate the file with some text
 				result = await file.ReadAllTextAsync();
-				*/
 			}
 			// if the file doesn't exist
 			catch (Exception ex)
@@ -113,7 +112,6 @@ namespace DailyBibleReading
 
 			try
 			{
-				/*
 				// get hold of the file system
 				IFolder rootFolder = FileSystem.Current.LocalStorage;
 
@@ -125,7 +123,6 @@ namespace DailyBibleReading
 
 				// populate the file with some text
 				await file.WriteAllTextAsync(_content);
-				*/
 
 				result = _content;
 			}
