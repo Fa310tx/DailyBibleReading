@@ -190,7 +190,7 @@ namespace DailyBibleReading.ViewModels
 		{
 			if (value != null && (bool)value)
 			{
-				return Color.Brown;
+				return Color.FromHex("#735c40");
 			}
 			else
 			{
