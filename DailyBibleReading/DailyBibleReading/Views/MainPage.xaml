@@ -3,7 +3,8 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:local="clr-namespace:DailyBibleReading"
 	xmlns:converters="clr-namespace:DailyBibleReading.ViewModels"
-	x:Class="DailyBibleReading.Views.MainPage">
+	x:Class="DailyBibleReading.Views.MainPage"
+	Title="Daily Bible Reading">
 
 	<TabbedPage.Resources>
 		<ResourceDictionary>

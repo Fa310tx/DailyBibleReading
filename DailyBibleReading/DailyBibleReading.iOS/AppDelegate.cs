@@ -24,6 +24,16 @@ namespace DailyBibleReading.iOS
         {
 			UIColor accentcolor = UIColor.FromRGB(115, 92, 64);
 
+			UISlider.Appearance.TintColor = accentcolor;
+			UISlider.Appearance.ThumbTintColor = accentcolor;
+
+			UITabBar.Appearance.TintColor = accentcolor;
+			UITabBar.Appearance.SelectedImageTintColor = accentcolor;
+
+			UINavigationBar.Appearance.BarTintColor = accentcolor;
+			UINavigationBar.Appearance.TintColor = UIColor.White;
+			UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes { TextColor = UIColor.White });
+
 			global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
