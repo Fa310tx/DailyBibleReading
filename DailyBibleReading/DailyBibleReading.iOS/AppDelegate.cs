@@ -22,7 +22,9 @@ namespace DailyBibleReading.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            global::Xamarin.Forms.Forms.Init();
+			UIColor accentcolor = UIColor.FromRGB(115, 92, 64);
+
+			global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
