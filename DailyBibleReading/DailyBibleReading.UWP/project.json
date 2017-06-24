@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "DLToolkit.Forms.Controls.FlowListView": "2.0.4",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3",
     "PCLStorage": "1.0.2",
     "Plugin.Share": "5.0.0",
