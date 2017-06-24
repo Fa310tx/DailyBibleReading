@@ -1,6 +1,7 @@
 ﻿using Plugin.Settings;
 using System;
-
+using System.Collections.Generic;
+using System.Globalization;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,11 +13,25 @@ namespace DailyBibleReading.Views
 		public Settings()
 		{
 			InitializeComponent();
+
+			List<string> FontSizes = new List<string>();
+			for (int i = 0; i < 50; i++)
+			{
+				FontSizes.Add(i.ToString());
+			}
+
+			List<string> Versions = new List<string> { "asv1901", "bbe", "darby", "kjv", "nasb", "niv", "nkjv", "nlt", "rsv", "web", "ylt" };
+			
+			// connect the data to the interface
+			// data binding for today's chapter
+			FontSizePicker.BindingContext = FontSizes;
+			// data binding for reading schedule
+			VersionPicker.BindingContext = Versions;
 		}
 
 		private void LoadPreferences()
 		{
-			FontSizePicker.SelectedIndex = Helpers.Settings.FontSize - 10;
+			FontSizePicker.SelectedIndex = Helpers.Settings.FontSize;
 
 			switch (Helpers.Settings.Version)
 			{
@@ -72,7 +87,7 @@ namespace DailyBibleReading.Views
 
 		private void FontSizePicker_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			var newfontsize = FontSizePicker.SelectedIndex + 10;
+			var newfontsize = FontSizePicker.SelectedIndex;
 			LoremIpsum.FontSize = newfontsize;
 
 			// store the user preferences

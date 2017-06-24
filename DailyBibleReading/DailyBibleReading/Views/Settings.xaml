@@ -4,10 +4,16 @@
 	x:Class="DailyBibleReading.Views.Settings"
 	Title="Settings">
 
+	<!--
+	<TableView Intent="Settings">
+		
+	</TableView>
+	-->
 	<ScrollView>
 		<StackLayout>
 			<Label Text="Bible Version"/>
-			<Picker x:Name="VersionPicker" SelectedIndexChanged="VersionPicker_SelectedIndexChanged">
+			<Picker x:Name="VersionPicker" ItemsSource="{Binding}" SelectedIndexChanged="VersionPicker_SelectedIndexChanged">
+				<!--
 				<Picker.Items>
 					<x:String>asv1901</x:String>
 					<x:String>bbe</x:String>
@@ -21,10 +27,22 @@
 					<x:String>web</x:String>
 					<x:String>ylt</x:String>
 				</Picker.Items>
+				-->
 			</Picker>
 			<Label Text="Font Size"/>
-			<Picker x:Name="FontSizePicker" SelectedIndexChanged="FontSizePicker_SelectedIndexChanged">
+			<Picker x:Name="FontSizePicker" ItemsSource="{Binding}" SelectedIndexChanged="FontSizePicker_SelectedIndexChanged">
+				<!--
 				<Picker.Items>
+					<x:String>0</x:String>
+					<x:String>1</x:String>
+					<x:String>2</x:String>
+					<x:String>3</x:String>
+					<x:String>4</x:String>
+					<x:String>5</x:String>
+					<x:String>6</x:String>
+					<x:String>7</x:String>
+					<x:String>8</x:String>
+					<x:String>9</x:String>
 					<x:String>10</x:String>
 					<x:String>11</x:String>
 					<x:String>12</x:String>
@@ -45,7 +63,28 @@
 					<x:String>27</x:String>
 					<x:String>28</x:String>
 					<x:String>29</x:String>
+					<x:String>30</x:String>
+					<x:String>31</x:String>
+					<x:String>32</x:String>
+					<x:String>33</x:String>
+					<x:String>34</x:String>
+					<x:String>35</x:String>
+					<x:String>36</x:String>
+					<x:String>37</x:String>
+					<x:String>38</x:String>
+					<x:String>39</x:String>
+					<x:String>40</x:String>
+					<x:String>41</x:String>
+					<x:String>42</x:String>
+					<x:String>43</x:String>
+					<x:String>44</x:String>
+					<x:String>45</x:String>
+					<x:String>46</x:String>
+					<x:String>47</x:String>
+					<x:String>48</x:String>
+					<x:String>49</x:String>
 				</Picker.Items>
+				-->
 			</Picker>
 			<Label x:Name="LoremIpsum" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
 		</StackLayout>
