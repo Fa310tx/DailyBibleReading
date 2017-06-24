@@ -125,17 +125,19 @@ namespace DailyBibleReading.ViewModels
 							_versecollection.Add(verseitem);
 						}
 					}
-					// no chapter on the weekend
-					// great examples of working with dates (http://www.dotnetperls.com/datetime)
-					else if (day == DayOfWeek.Saturday || day == DayOfWeek.Sunday)
-					{
-						var verseitem = new VerseItem();
+				}
+				// no chapter on the weekend
+				// great examples of working with dates (http://www.dotnetperls.com/datetime)
+				if (day == DayOfWeek.Saturday || day == DayOfWeek.Sunday)
+				{
+					var verseitem = new VerseItem();
 
-						verseitem.text = "Come join us in reading the Bible this year. We read one chapter of the Bible each weekday (Monday through Friday).";
-						verseitem.VerseReference = "No chapter today";
+					verseitem.text = "Come join us in reading the Bible this year. We read one chapter of the Bible each weekday (Monday through Friday).";
+					verseitem.VerseReference = "No chapter today";
+					verseitem.DetailFontSize = Helpers.Settings.FontSize;
+					verseitem.TitleFontSize = Convert.ToInt32(verseitem.DetailFontSize * 0.6);
 
-						_versecollection.Add(verseitem);
-					}
+					_versecollection.Add(verseitem);
 				}
 			}
 			else
@@ -144,6 +146,8 @@ namespace DailyBibleReading.ViewModels
 
 				chapteritem.date = "No Data";
 				chapteritem.ChapterReference = "Unable to connect to the internet or load from cache.";
+				chapteritem.DetailFontSize = Helpers.Settings.FontSize;
+				chapteritem.TitleFontSize = Convert.ToInt32(chapteritem.DetailFontSize * 0.6);
 
 				_chaptercollection.Add(chapteritem);
 
@@ -151,6 +155,8 @@ namespace DailyBibleReading.ViewModels
 
 				verseitem.text = "Unable to connect to the internet or load from cache.";
 				verseitem.VerseReference = "No Data";
+				verseitem.DetailFontSize = chapteritem.DetailFontSize;
+				verseitem.TitleFontSize = chapteritem.TitleFontSize;
 
 				_versecollection.Add(verseitem);
 			}
