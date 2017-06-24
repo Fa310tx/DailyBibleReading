@@ -3,6 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:local="clr-namespace:DailyBibleReading"
 	xmlns:converters="clr-namespace:DailyBibleReading.ViewModels"
+	xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
 	x:Class="DailyBibleReading.Views.MainPage"
 	Title="Daily Bible Reading">
 
@@ -43,6 +44,20 @@
 					</DataTemplate>
 				</ListView.ItemTemplate>
 			</ListView>
+			<!--
+			<flv:FlowListView x:Name="Verses" FlowColumnMinWidth="110" FlowItemsSource="{Binding}" HasUnevenRows="True">
+				<flv:FlowListView.FlowColumnTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<StackLayout Padding="12, 6">
+								<Label Text="{Binding VerseReference}" FontAttributes="Bold" FontSize="{Binding TitleFontSize}" Margin="0, 0, 0, -6"/>
+								<Label Text="{Binding text}" FontSize="{Binding DetailFontSize}"/>
+							</StackLayout>
+						</ViewCell>
+					</DataTemplate>
+				</flv:FlowListView.FlowColumnTemplate>
+			</flv:FlowListView>
+			-->
 		</ContentPage>
 		<ContentPage Title="Reading Schedule">
 			<ListView x:Name="Chapters" CachingStrategy="RecycleElement" HasUnevenRows="True" ItemsSource="{Binding}" ItemTapped="Chapters_ItemTapped" Margin="-12, 0">
