@@ -22,6 +22,9 @@ namespace DailyBibleReading.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+			global::Xamarin.Forms.Forms.Init();
+
+			// set app colors
 			UIColor accentcolor = UIColor.FromRGB(115, 92, 64);
 
 			UISlider.Appearance.TintColor = accentcolor;
@@ -34,7 +37,6 @@ namespace DailyBibleReading.iOS
 			UINavigationBar.Appearance.TintColor = UIColor.White;
 			UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes { TextColor = UIColor.White });
 
-			global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
