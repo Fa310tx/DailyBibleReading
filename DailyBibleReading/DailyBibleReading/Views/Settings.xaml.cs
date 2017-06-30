@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -122,12 +123,14 @@ namespace DailyBibleReading.Views
 				{ "web", "World English Bible" },
 				{ "ylt", "Young's Literal Translation" },
 			};
+			List<KeyValuePair<string, string>> VersionList = VersionDictionary.ToList();
+
 
 			// connect the data to the interface
 			// data binding for today's chapter
 			FontSizePicker.BindingContext = FontSizes;
 			// data binding for reading schedule
-			VersionPicker.BindingContext = VersionAbbreviations;
+			VersionPicker.BindingContext = VersionList;
 		}
 
 		private void LoadPreferences()
@@ -245,7 +248,17 @@ namespace DailyBibleReading.Views
 
 		private void VersionPicker_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			var version = "b_" + VersionPicker.SelectedItem.ToString();
+			var selecteditem = VersionPicker.SelectedItem.ToString();
+			// single quotes make it type Char while double quotes make it type String
+			Char delimiter = ',';
+			// create an array from the string separated by the delimiter
+			String[] selecteditemparts = selecteditem.Split(delimiter);
+			// take off the beginning character
+			var selecteditemkey = selecteditemparts[0].Substring(1);
+			// take off the beginning and ending character
+			var selecteditemvalue = selecteditemparts[1].Substring(1, (selecteditemparts[1].Length - 2));
+			var version = "b_" + selecteditemkey;
+
 			CrossSettings.Current.AddOrUpdateValue("Version", version);
 		}
 
