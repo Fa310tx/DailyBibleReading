@@ -233,6 +233,7 @@ namespace DailyBibleReading.Views
 					VersionPicker.SelectedIndex = 30;
 					break;
 				default:
+					// default is kjv
 					VersionPicker.SelectedIndex = 11;
 					break;
 			}

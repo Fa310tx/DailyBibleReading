@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 namespace DailyBibleReading.Models
 {
 	class Bible : INotifyPropertyChanged
 	{
-		/* if using enum
-		public Versions Version { get; set; }
-		*/
-		public string Version { get; set; }
-		public List<Book> Books { get; set; }
+		string Version { get; set; }
+		List<Book> Books { get; set; }
 
 		event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
 		{
@@ -23,37 +21,66 @@ namespace DailyBibleReading.Models
 			}
 		}
 
-		public Dictionary<string, string> VersionDictionary = new Dictionary<string, string>()
+		static Dictionary<string, string> VersionDictionary = new Dictionary<string, string>()
 		{
-			{ "b_asv1901", "American Standard Version 1901" },
-			{ "b_bbe", "Bible In Basic English" },
-			{ "b_darby", "Darby English Bible" },
-			{ "b_kjv", "King James Version" },
-			{ "b_nasb", "New American Standard Bible" },
-			{ "b_niv", "New International Version" },
-			{ "b_nkjv", "New King James Version" },
-			{ "b_nlt", "New Living Translation" },
-			{ "b_rsv", "Revised Standard Version" },
-			{ "b_web", "World English Bible" },
-			{ "b_ylt", "Young's Literal Translation" }
+			{ "asv1901", "American Standard Version" },
+			{ "bbe", "Bible In Basic English" },
+			{ "cjb", "Complete Jewish Bible" },
+			{ "cev", "Contemporary English Version" },
+			{ "darby", "Darby Bible" },
+			{ "erv", "Easy-To-Read Version" },
+			{ "gnv", "Geneva Bible" },
+			{ "gw", "God's Word" },
+			{ "gnt", "Good News Translation" },
+			{ "hnv", "Hebrew Names Version Of The World English Bible" },
+			{ "hcsb", "Holman Christian Standard Bible" },
+			{ "kjv", "King James Version" },
+			{ "mkjv", "Modern King James Version" },
+			{ "nasb", "New American Standard Bible" },
+			{ "ncv", "New Century Version" },
+			{ "net", "New English Translation" },
+			{ "nirv", "New International Reader's Version" },
+			{ "nkjv", "New King James Version" },
+			{ "nlt", "New Living Translation" },
+			{ "nrsv", "New Revised Standard Version" },
+			{ "rsv", "Revised Standard Version" },
+			{ "amp", "The Amplified Bible" },
+			{ "esv", "The English Standard Version" },
+			{ "tlb", "The Living Bible" },
+			{ "msg", "The Message" },
+			{ "niv", "The New International Version" },
+			{ "tev", "Today's English Version" },
+			{ "tniv", "Today's New International Version" },
+			{ "wbt", "Webster's Bible Translation" },
+			{ "web", "World English Bible" },
+			{ "ylt", "Young's Literal Translation" },
 		};
+		List<KeyValuePair<string, string>> VersionList = VersionDictionary.ToList();
+	}
+	class Book : INotifyPropertyChanged
+	{
+		string Name { get; set; }
+		List<Chapter> Chapters { get; set; }
 
-		public string[] VersionArray = new string[]
+		event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
 		{
-			"American Standard Version 1901",
-			"Bible In Basic English",
-			"Darby English Bible",
-			"King James Version",
-			"New American Standard Bible",
-			"New International Version",
-			"New King James Version",
-			"New Living Translation",
-			"Revised Standard Version",
-			"World English Bible",
-			"Young's Literal Translation"
-		};
+			add
+			{
+			}
 
-		public string[] BookArray = new string[66]
+			remove
+			{
+			}
+		}
+
+		List<string> BookEnumList()
+		{
+			IEnumerable<BookEnum> BooksIEnumerable = Enum.GetValues(typeof(BookEnum)).Cast<BookEnum>();
+			List<string> BooksWithSpaces = new List<string>(BooksIEnumerable.Select(v => v.ToString().Replace("_", " ")));
+			return BooksWithSpaces;
+		}
+
+		static string[] BookArray = new string[66]
 		{
 			"Genesis",
 			"Exodus",
@@ -122,30 +149,15 @@ namespace DailyBibleReading.Models
 			"Jude",
 			"Revelation"
 		};
-	}
-	class Book : INotifyPropertyChanged
-	{
-		public string Name { get; set; }
-		public List<Chapter> Chapters { get; set; }
-
-		event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
-		{
-			add
-			{
-			}
-
-			remove
-			{
-			}
-		}
+		List<string> BookList = BookArray.ToList();
 	}
 	class Chapter : INotifyPropertyChanged
 	{
-		public DateTime Date { get; set; }
-		public bool HasBeenRead { get; set; }
-		public bool IsTodaysChapter { get; set; }
-		public int Number { get; set; }
-		public List<Verse> Verses { get; set; }
+		DateTime Date { get; set; }
+		bool HasBeenRead { get; set; }
+		bool IsTodaysChapter { get; set; }
+		int Number { get; set; }
+		List<Verse> Verses { get; set; }
 
 		event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
 		{
@@ -160,8 +172,8 @@ namespace DailyBibleReading.Models
 	}
 	class Verse : INotifyPropertyChanged
 	{
-		public int Number { get; set; }
-		public string Text { get; set; }
+		int Number { get; set; }
+		string Text { get; set; }
 
 		event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
 		{
@@ -175,12 +187,10 @@ namespace DailyBibleReading.Models
 		}
 	}
 
-	// enum can't have spaces
-	enum Books
+	// enums can't have spaces
+	enum BookEnum
 	{
-		// normally starts with 0 but you can change the beginning number
-		// we change because the database starts with 1
-		Genesis = 1,
+		Genesis,
 		Exodus,
 		Leviticus,
 		Numbers,
