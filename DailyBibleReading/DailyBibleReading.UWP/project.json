@@ -3,9 +3,9 @@
     "DLToolkit.Forms.Controls.FlowListView": "2.0.4",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3",
     "PCLStorage": "1.0.2",
-    "Plugin.Share": "5.0.0",
+    "Plugin.Share": "7.0.1",
     "System.Net.Http": "4.3.2",
-    "Xam.Plugin.DeviceInfo": "2.1.2",
+    "Xam.Plugin.DeviceInfo": "3.0.1",
     "Xam.Plugins.Settings": "2.5.8",
     "Xamarin.Forms": "2.3.4.247"
   },

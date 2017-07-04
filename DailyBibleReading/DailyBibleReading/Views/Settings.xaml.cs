@@ -123,7 +123,9 @@ namespace DailyBibleReading.Views
 				{ "web", "World English Bible" },
 				{ "ylt", "Young's Literal Translation" },
 			};
-			List<KeyValuePair<string, string>> VersionList = VersionDictionary.ToList();
+			// take the dictionary<string, string>, turn it into an ienumerable<keyvaluepair<string, string>>, use linq to output the contents, format a new string based on those contents, turn it into list<string>
+			// "Bible In Basic English (bbe)
+			var VersionList = VersionDictionary.AsEnumerable().Select(x => string.Format("{0} ({1})", x.Value, x.Key.ToUpper())).ToList();
 
 
 			// connect the data to the interface
@@ -251,14 +253,14 @@ namespace DailyBibleReading.Views
 		{
 			var selecteditem = VersionPicker.SelectedItem.ToString();
 			// single quotes make it type Char while double quotes make it type String
-			Char delimiter = ',';
+			Char delimiter = '(';
 			// create an array from the string separated by the delimiter
 			String[] selecteditemparts = selecteditem.Split(delimiter);
 			// take off the beginning character
-			var selecteditemkey = selecteditemparts[0].Substring(1);
+			var selecteditemvalue = selecteditemparts[0].Substring(0, (selecteditemparts[0].Length - 1));
 			// take off the beginning and ending character
-			var selecteditemvalue = selecteditemparts[1].Substring(1, (selecteditemparts[1].Length - 2));
-			var version = "b_" + selecteditemkey;
+			var selecteditemkey = selecteditemparts[1].Substring(0, (selecteditemparts[1].Length - 1));
+			var version = "b_" + selecteditemkey.ToLower();
 
 			CrossSettings.Current.AddOrUpdateValue("Version", version);
 		}
