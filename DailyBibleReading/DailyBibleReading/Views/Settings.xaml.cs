@@ -14,81 +14,27 @@ namespace DailyBibleReading.Views
 		public Settings()
 		{
 			InitializeComponent();
+		}
 
+		// page load stuff
+		protected override void OnAppearing()
+		{
+			PopulatePickers();
+			LoadPreferences();
+
+			base.OnAppearing();
+		}
+
+		private void PopulatePickers()
+		{
 			List<string> FontSizes = new List<string>();
 			for (int i = 0; i < 50; i++)
 			{
 				FontSizes.Add(i.ToString());
 			}
+			// connect the data to the interface
+			FontSizePicker.BindingContext = FontSizes;
 
-			List<string> VersionAbbreviations = new List<string>
-			{
-				"asv1901",
-				"bbe",
-				"cjb",
-				"cev",
-				"darby",
-				"erv",
-				"gnv",
-				"gw",
-				"gnt",
-				"hnv",
-				"hcsb",
-				"kjv",
-				"mkjv",
-				"nasb",
-				"ncv",
-				"net",
-				"nirv",
-				"nkjv",
-				"nlt",
-				"nrsv",
-				"rsv",
-				"amp",
-				"esv",
-				"tlb",
-				"msg",
-				"niv",
-				"tev",
-				"tniv",
-				"wbt",
-				"web",
-				"ylt",
-			};
-			List<string> VersionNames = new List<string>
-			{
-				"American Standard Version",
-				"Bible In Basic English",
-				"Complete Jewish Bible",
-				"Contemporary English Version",
-				"Darby Bible",
-				"Easy-To-Read Version",
-				"Geneva Bible",
-				"God's Word",
-				"Good News Translation",
-				"Hebrew Names Version Of The World English Bible",
-				"Holman Christian Standard Bible",
-				"King James Version",
-				"Modern King James Version",
-				"New American Standard Bible",
-				"New Century Version",
-				"New English Translation",
-				"New International Reader's Version",
-				"New King James Version",
-				"New Living Translation",
-				"New Revised Standard Version",
-				"Revised Standard Version",
-				"The Amplified Bible",
-				"The English Standard Version",
-				"The Living Bible",
-				"The Message",
-				"The New International Version",
-				"Today's English Version",
-				"Today's New International Version",
-				"Webster's Bible Translation",
-				"World English Bible",
-				"Young's Literal Translation",
-			};
 			Dictionary<string, string> VersionDictionary = new Dictionary<string, string>()
 			{
 				{ "asv1901", "American Standard Version" },
@@ -124,14 +70,10 @@ namespace DailyBibleReading.Views
 				{ "ylt", "Young's Literal Translation" },
 			};
 			// take the dictionary<string, string>, turn it into an ienumerable<keyvaluepair<string, string>>, use linq to output the contents, format a new string based on those contents, turn it into list<string>
-			// "Bible In Basic English (bbe)
+			// "Bible In Basic English (BBE)"
 			var VersionList = VersionDictionary.AsEnumerable().Select(x => string.Format("{0} ({1})", x.Value, x.Key.ToUpper())).ToList();
 
-
 			// connect the data to the interface
-			// data binding for today's chapter
-			FontSizePicker.BindingContext = FontSizes;
-			// data binding for reading schedule
 			VersionPicker.BindingContext = VersionList;
 		}
 
@@ -239,14 +181,6 @@ namespace DailyBibleReading.Views
 					VersionPicker.SelectedIndex = 11;
 					break;
 			}
-		}
-
-		// page load stuff
-		protected override void OnAppearing()
-		{
-			LoadPreferences();
-
-			base.OnAppearing();
 		}
 
 		private void VersionPicker_SelectedIndexChanged(object sender, EventArgs e)
